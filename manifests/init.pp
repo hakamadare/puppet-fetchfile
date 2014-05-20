@@ -25,11 +25,12 @@ define fetchfile (
   $group='root',
   $mode='775',
   $recurse=false,
-  $execrecurse=true
+  $execrecurse=true,
+  $extrapaths=[]
 ) {
 
   # common things for exec
-  $execlaunchpaths = ["/usr/bin", "/usr/sbin", "/bin", "/sbin", "/etc"]
+  $execlaunchpaths = flatten( [ $extrapaths, ["/usr/bin", "/usr/sbin", "/bin", "/sbin", "/etc"] ] )
   $executefrom = "/tmp/"
 
   # creates tests for commandline execution
